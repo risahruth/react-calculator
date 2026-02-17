@@ -1,0 +1,17 @@
+div{
+  margin-right:auto;
+  margin-left: auto;
+  background-color: bisque;
+  width:75px;
+}
+.inputs{
+  background-color: black;
+  color: whitesmoke;
+  font-size: medium;
+}
+.excess{
+  width:37px;
+  background-color: black;
+  color: whitesmoke;
+  font-size: medium;
+}
