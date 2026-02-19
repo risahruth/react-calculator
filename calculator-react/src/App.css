@@ -1,16 +1,28 @@
-div{
-  margin-right:auto;
-  margin-left: auto;
-  background-color: bisque;
-  width:75px;
+body {
+  margin: 0;
+  height: 300vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.inputs{
+
+div {
+  background-color: bisque;
+  width: 150px;
+}
+#result{
+ 
+}
+
+
+.inputs {
   background-color: black;
   color: whitesmoke;
   font-size: medium;
 }
-.excess{
-  width:37px;
+
+.excess {
+  width: 37px;
   background-color: black;
   color: whitesmoke;
   font-size: medium;
