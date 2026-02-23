@@ -1,48 +1,64 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [result, setResult] = useState("");
+  const [input, setInput] = useState("");
 
-  const handleClick = (event) => {
-    setResult(result + event.target.value);
+  const handleClick = (value) => {
+    setInput((prev) => prev + value);
   };
 
-  const clearDisplay = () => {
-    setResult("");
+  const clearInput = () => {
+    setInput("");
   };
 
-  const calculate = () => {
+  const deleteLast = () => {
+    setInput((prev) => prev.slice(0, -1));
+  };
+
+  const calculateResult = () => {
     try {
-      setResult(eval(result).toString());
+      // eslint-disable-next-line no-eval
+      const result = eval(input);
+      setInput(result.toString());
     } catch {
-      setResult("Error");
+      setInput("Error");
     }
   };
 
+  const buttons = [
+    "7", "8", "9", "/",
+    "4", "5", "6", "*",
+    "1", "2", "3", "-",
+    "0", ".", "=", "+"
+  ];
+
   return (
-    <div>
-      <input type="text" id='result' value={result} readOnly />
+    <div className="calculator">
+      <h2>React Calculator</h2>
 
-      <input type="button" value="1" class='inputs' onClick={handleClick} />
-      <input type="button" value="2" class='inputs' onClick={handleClick} />
-      <input type="button" value="3" class='inputs' onClick={handleClick} />
-      <input type="button" value="4" class='inputs' onClick={handleClick} />
-      <input type="button" value="5" class='inputs' onClick={handleClick} />
-      <input type="button" value="6" class='inputs' onClick={handleClick} />
-      <input type="button" value="7" class='inputs' onClick={handleClick} />
-      <input type="button" value="8" class='inputs' onClick={handleClick} />
-      <input type="button" value="9" class='inputs' onClick={handleClick} />
-      <input type="button" value="0" class='inputs' onClick={handleClick} />
+      <input
+        type="text"
+        value={input}
+        readOnly
+        className="display"
+      />
 
-      <input type="button" value="+" class='inputs' onClick={handleClick} />
-      <input type="button" value="-" class='inputs' onClick={handleClick} />
-      <input type="button" value="*" class='inputs' onClick={handleClick} />
-      <input type="button" value="/" class='inputs' onClick={handleClick} />
-      <input type="button" value="." class='inputs' onClick={handleClick} />
+      <div className="buttons">
+        <button onClick={clearInput} className="special">C</button>
+        <button onClick={deleteLast} className="special">DEL</button>
 
-      <input type="button" value="Clear" class='excess' onClick={clearDisplay} />
-      <input type="button" value="=" class='excess' onClick={calculate} />
+        {buttons.map((btn, index) => (
+          <button
+            key={index}
+            onClick={() =>
+              btn === "=" ? calculateResult() : handleClick(btn)
+            }
+          >
+            {btn}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
